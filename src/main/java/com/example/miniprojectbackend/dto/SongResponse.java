@@ -11,4 +11,9 @@ public class SongResponse {
 
   private String melody;
   private String text;
+
+  public SongResponse(String melody, String text) {
+    this.melody = melody;
+    this.text = text;
+  }
 }

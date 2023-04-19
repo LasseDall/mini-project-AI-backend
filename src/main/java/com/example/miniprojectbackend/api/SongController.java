@@ -19,7 +19,8 @@ public class SongController {
 
    @PostMapping
    SongResponse getSong(@RequestBody SongRequest songRequest) throws JsonProcessingException {
-     String song = String.valueOf(songService.writeSong(songRequest));
-     return null;
+    SongResponse songResponse = songService.writeSong(songRequest).block();
+     System.out.println(songResponse.getText());
+    return songResponse;
   }
 }

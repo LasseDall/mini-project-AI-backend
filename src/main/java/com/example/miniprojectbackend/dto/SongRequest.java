@@ -13,7 +13,8 @@ public class SongRequest {
   private String melody;
   private int numberOfVerses;
   private String cause;
-  private ArrayList<String> adjectives;
+  private String name;
+  private String adjectives;
   private String mood;
 
 }
