@@ -17,6 +17,11 @@ public class SongController {
     this.songService = songService;
   }
 
+  @GetMapping
+  String string(){
+    return "hej";
+  }
+
    @PostMapping
    SongResponse getSong(@RequestBody SongRequest songRequest) throws JsonProcessingException {
     SongResponse songResponse = songService.writeSong(songRequest).block();
