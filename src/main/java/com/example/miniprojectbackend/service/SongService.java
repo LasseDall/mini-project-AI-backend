@@ -18,7 +18,7 @@ public class SongService {
     List<Map<String, String>> messagesList = new ArrayList<>();
     Map<String, String> messageMap = new HashMap<>();
     messageMap.put("role", "user");
-    messageMap.put("content", "Skriv en sang til mathilde på melodien jeg ved en lærkerede på 2 vers!");
+    messageMap.put("content", "Skriv en sang til " + songRequest.getName() + " i af anledning af " + songRequest.getName() + "'s " + songRequest.getCause() + ". Sangen skal være på melodien " + songRequest.getMelody() + " og have " + songRequest.getNumberOfVerses() + " vers. Stemningen i sangen skal være " + songRequest.getMood() + ". " + songRequest.getName() + " er " + songRequest.getAdjectives() + ". Sangen skal rime i par på dansk! Snagen skal således ikke skrives på engelsk og derefter oversættes, men skrives direkte på dansk og rime! Ligeledes skal stavelserne passe på melodien på dansk!");
     messagesList.add(messageMap);
       Map<String, Object> bodyMap = new HashMap<>();
       bodyMap.put("messages", messagesList);
