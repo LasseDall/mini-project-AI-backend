@@ -16,4 +16,12 @@ public class SongResponse {
     this.melody = melody;
     this.text = text;
   }
+
+  @Override
+  public String toString() {
+    return "SongResponse{" +
+        "melody='" + melody + '\'' +
+        ", text='" + text + '\'' +
+        '}';
+  }
 }

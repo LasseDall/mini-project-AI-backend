@@ -22,10 +22,11 @@ public class SongController {
     return "hej";
   }
 
-   @PostMapping
+   @PostMapping("write")
+   @ResponseBody
    SongResponse getSong(@RequestBody SongRequest songRequest) throws JsonProcessingException {
     SongResponse songResponse = songService.writeSong(songRequest).block();
-     System.out.println(songResponse.getText());
+     System.out.println(songResponse);
     return songResponse;
   }
 }
