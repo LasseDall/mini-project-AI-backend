@@ -1,5 +1,6 @@
 package com.example.miniprojectbackend.api;
 
+import com.example.miniprojectbackend.dto.ChangeRequest;
 import com.example.miniprojectbackend.dto.SongRequest;
 import com.example.miniprojectbackend.dto.SongResponse;
 import com.example.miniprojectbackend.service.SongService;
@@ -23,10 +24,16 @@ public class SongController {
   }
 
    @PostMapping("write")
-   @ResponseBody
    SongResponse getSong(@RequestBody SongRequest songRequest) throws JsonProcessingException {
     SongResponse songResponse = songService.writeSong(songRequest).block();
      System.out.println(songResponse);
+    return songResponse;
+  }
+
+  @PostMapping("change")
+  SongResponse getChangedSong(@RequestBody ChangeRequest changeRequest) throws JsonProcessingException {
+    SongResponse songResponse = songService.changeSong(changeRequest).block();
+    System.out.println(songResponse);
     return songResponse;
   }
 }
