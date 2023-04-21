@@ -14,12 +14,23 @@ import java.util.*;
 @Service
 public class SongService {
 
+  private Map<String, String> songTitles = new HashMap<>();
+  private boolean titleKnown = false;
+
+
   public Mono<SongResponse> writeSong(SongRequest songRequest) {
       WebClient client = WebClient.create();
+      songTitles.put("jeg ved en lærkerede", "Jeg ved en lærkerede \n Jeg siger ikke mer' \n Den findes på en hede \n Et sted som ingen ser.");
+      songTitles.put("velkommen i den grønne lund", "Velkommen i den grønne lund! \n Hvor fuglene de sjunge. \n Det høres skal: Den danske mund \n Til sang har og en tunge \n Vi har det godt i grunden her, \n Såvel som vore fædre; \n vil gud, den dag tør være nær, \n vi får det end lidt bedre.");
     List<Map<String, String>> messagesList = new ArrayList<>();
     Map<String, String> messageMap = new HashMap<>();
     messageMap.put("role", "user");
-    messageMap.put("content", "Skriv en sang til " + songRequest.getName() + " i af anledning af " + songRequest.getName() + "'s " + songRequest.getCause() + ". Sangen skal være på melodien " + songRequest.getMelody() + " og have " + songRequest.getNumberOfVerses() + " vers. Stemningen i sangen skal være " + songRequest.getMood() + ". " + songRequest.getName() + " er " + songRequest.getAdjectives() + ". Sangen skal rime i par på dansk! Snagen skal således ikke skrives på engelsk og derefter oversættes, men skrives direkte på dansk og rime! Ligeledes skal stavelserne passe på melodien på dansk!");
+    if (songTitles.containsKey(songRequest.getMelody().toLowerCase())) {
+        String verse = songTitles.get(songRequest.getMelody().toLowerCase());
+      messageMap.put("content", "Skriv en sang til " + songRequest.getName() + " i af anledning af " + songRequest.getName() + "'s " + songRequest.getCause() + ". Sangen skal være på melodien " + songRequest.getMelody() + " og have " + songRequest.getNumberOfVerses() + " vers. Første vers af " + songRequest.getMelody() + " er som følger: " + verse + "Du skal således skrive en sang med samme antal linjer og stavelser og samme type rim pr. vers. Stemningen i sangen skal være " + songRequest.getMood() + ". " + songRequest.getName() + " er " + songRequest.getAdjectives() + ". Sangen skal rime i par på dansk! Snagen skal således ikke skrives på engelsk og derefter oversættes, men skrives direkte på dansk og rime! Ligeledes skal stavelserne passe på melodien på dansk!");
+    } else {
+      messageMap.put("content", "Skriv en sang til " + songRequest.getName() + " i af anledning af " + songRequest.getName() + "'s " + songRequest.getCause() + ". Sangen skal være på melodien " + songRequest.getMelody() + " og have " + songRequest.getNumberOfVerses() + " vers. Stemningen i sangen skal være " + songRequest.getMood() + ". " + songRequest.getName() + " er " + songRequest.getAdjectives() + ". Sangen skal rime i par på dansk! Snagen skal således ikke skrives på engelsk og derefter oversættes, men skrives direkte på dansk og rime! Ligeledes skal stavelserne passe på melodien på dansk!");
+    }
     messagesList.add(messageMap);
       Map<String, Object> bodyMap = new HashMap<>();
       bodyMap.put("messages", messagesList);
